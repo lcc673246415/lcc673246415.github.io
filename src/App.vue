@@ -1,29 +1,41 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <mt-navbar v-model="path">
+      <mt-tab-item id="/single">
+        <router-link  tag="div" to="/single">单选题</router-link>
+      </mt-tab-item>
+      <mt-tab-item id="/many">
+        <router-link  tag="div" to="/many">多选题</router-link>
+      </mt-tab-item>
+      <mt-tab-item id="/judge">
+        <router-link  tag="div" to="/judge">判断题</router-link>
+      </mt-tab-item>
+    </mt-navbar>
+    <router-view style="margin:20px 10px 0 10px"  />
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      path:this.$route.path
+    };
+  },
+  created() {
+  data[0].data.shift()
+  data[0].data.shift()
+  data[1].data.shift()
+  data[1].data.shift()
+  data[2].data.shift()
+  data[2].data.shift()
+    console.log(data);
+  }
+};
+</script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+body,html{
+  margin:0;
+  padding:0;
 }
 </style>
