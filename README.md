@@ -19,6 +19,7 @@ yarn run build
 ```
 yarn run test
 ```
+git commit -m "first commit"
 
 ### Lints and fixes files
 ```
