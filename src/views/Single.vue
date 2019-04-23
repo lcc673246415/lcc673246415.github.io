@@ -108,7 +108,7 @@ export default {
 <style  scoped lang="scss">
 .title {
   font-weight: 900;
-  font-size: 16px;
+  font-size: 20px;
 }
 .mint-radio-label {
   font-size: 20px;
