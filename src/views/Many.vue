@@ -30,40 +30,43 @@ export default {
     return {
       options: null,
       number: 1,
-      subject: data[1].data.map(item => item[1]),
+      subject: null,
       Choice: [],
-      values: data[1].data.map(item => item[2]),
+      values: null,
       iserror: true,
-      len: data[1].data.length,
+      len: null,
       slots: null,
       popupVisible: false,
       correct:false
     };
   },
   created() {
-    this.options = data[1].data.map(item => {
+    this.subject=duoxuanti[0].data.map(item => item[1])
+    this.values=duoxuanti[0].data.map(item => item[4])
+    this.len=duoxuanti[0].data.length
+    this.options = duoxuanti[0].data.map(item => {
       return [
         {
-          label: "A、" + item[3],
+          label: "A、" + item[5],
           value: "A"
         },
         {
-          label: "B、" + item[4],
+          label: "B、" + item[6],
           value: "B"
         },
         {
-          label: "C、" + item[5],
+          label: "C、" + item[7],
           value: "C"
         },
         {
-          label: "D、" + item[6],
+          label: "D、" + item[8],
           value: "D"
         }
       ];
     });
     this.slots = [
       {
-        values: data[1].data.map(item => item[0])
+        values: duoxuanti[0].data.map(item => item[0])
       }
     ];
     console.log(this.options);
@@ -103,10 +106,7 @@ export default {
 <style  scoped lang="scss">
 .title {
   font-weight: 900;
-  font-size: 26px;
-}
-.mint-radio-label {
-  font-size: 24px;
+  font-size: 28px;
 }
 .error {
   color: red;

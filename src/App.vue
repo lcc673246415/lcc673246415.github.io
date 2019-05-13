@@ -22,13 +22,19 @@ export default {
     };
   },
   created() {
-  data[0].data.shift()
-  data[0].data.shift()
-  data[1].data.shift()
-  data[1].data.shift()
-  data[2].data.shift()
-  data[2].data.shift()
-    console.log(data);
+     danxuanti[0].data.shift();
+    danxuanti[0].data.shift();
+    danxuanti[0].data.shift();
+     duoxuanti[0].data.shift();
+    duoxuanti[0].data.shift();
+    duoxuanti[0].data.shift();
+     panduanti[0].data.shift();
+    panduanti[0].data.shift();
+    panduanti[0].data.shift();
+  // console.log(duoxuanti);
+  // console.log(duoxuanti);
+  // console.log(panduanti);
+
   }
 };
 </script>
@@ -37,5 +43,11 @@ export default {
 body,html{
   margin:0;
   padding:0;
+}
+#app .mint-checkbox-label {
+  font-size: 24px;
+}
+#app .mint-radio-label{
+  font-size: 24px  ;
 }
 </style>
