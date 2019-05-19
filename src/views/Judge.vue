@@ -4,7 +4,7 @@
     <div class="title">{{number}}、{{subject[number-1]}}</div>
     <mt-radio align="right" @change="changeChoice" v-model="Choice" :options="options[number-1]"></mt-radio>
     <div class="error" v-show="iserror">错误了！</div>
-    <div class="success" v-show="correct">{{values[number-1]==0?'正确':'错误'}}</div>
+    <div class="success" v-show="correct">{{values[number-1]==1?'正确':'错误'}}</div>
     <div class="box">
       <mt-button type="primary" @click="upper">上一题</mt-button>
       <mt-button type="primary" @click="lower">下一题</mt-button>
@@ -51,11 +51,11 @@ export default {
       return [
         {
           label: "正确",
-          value: "0"
+          value: "1"
         },
         {
           label: "错误",
-          value: "1"
+          value: "0"
         }
       ];
     });
