@@ -1,15 +1,15 @@
 <!--  -->
 <template>
   <div>
-    <div class="title">{{number}}、{{subject[number-1]}}</div>
-    <mt-radio style="font-size:40px" align="right" @change="changeChoice" v-model="Choice" :options="options[number-1]"></mt-radio>
-    <div class="error" v-show="iserror">错误了！正确答案:{{values[number-1]}}</div>
-    <div class="success" v-show="correct">{{values[number-1]}}</div>
+    <div class="title">{{number}}、{{subject[number]}}</div>
+    <mt-radio style="font-size:40px" align="right" @change="changeChoice" v-model="Choice" :options="options[number]"></mt-radio>
+     <div class="error" v-show="iserror">错误了！正确答案:{{values[number]}}</div>
+    <div class="success" v-show="correct">{{values[number]}}</div>
     <div class="box">
       <mt-button type="primary" @click="upper">上一题</mt-button>
       <mt-button type="primary" @click="lower">下一题</mt-button>
     </div>
-    <div class="choiceBtn" style="padding-bottom:10px">
+     <div class="choiceBtn" style="padding-bottom:10px">
       <mt-button type="primary" @click="correct=!correct">正确答案</mt-button>
     </div>
     <div class="choiceBtn">
@@ -21,7 +21,7 @@
         <mt-picker :slots="slots" style="width:700px;" @change="onValuesChange">
         </mt-picker>
       </div>
-    </mt-popup>
+    </mt-popup> 
   </div>
 </template>
 
@@ -44,47 +44,61 @@ export default {
   },
   created() {
    
-    console.log(danxuanti[0].data)
-    this.subject=danxuanti[0].data.map(item => item[1])
-    this.values=danxuanti[0].data.map(item => item[4])
-    this.len=351
+    console.log(danxuanti)
+    this.subject=danxuanti.map(item => item[1])
+    this.values=danxuanti.map(item =>{
+      if(item[2]==1){
+        return "A"
+      }
+      if(item[2]==2){
+        return "B"
+      }
+      if(item[2]==3){
+        return "C"
+      }
+      if(item[2]==4){
+        return "D"
+      }
+    })
+    this.len=danxuanti.length
     //  subject: data[0].data.map(item => item[1]),
     //  values: data[0].data.map(item => item[2]),
     //  len: data[0].data.length,
     // console.log(this.number)
-    this.options = danxuanti[0].data.map(item => {
+    this.options = danxuanti.map(item => {
       return [
         {
-          label: "A、" + item[5],
+          label: "A、" + item[3],
           value: "A"
         },
         {
-          label: "B、" + item[6],
+          label: "B、" + item[4],
           value: "B"
         },
         {
-          label: "C、" + item[7],
+          label: "C、" + item[5],
           value: "C"
         },
         {
-          label: "D、" + item[8],
+          label: "D、" + item[6],
           value: "D"
         }
       ];
     });
     this.slots = [
       {
-        values: danxuanti[0].data.map(item => item[0])
+        values: danxuanti.map((item,index) => index+1)
       }
     ];
     console.log(this.options);
+     console.log(this.slots);
     
   },
   methods: {
     changeChoice() {
-      console.log(this.values[this.number - 1])
+      console.log(this.values[this.number])
       console.log(this.Choice)
-      if (this.values[this.number - 1].trim() == this.Choice.trim()) {
+      if (this.values[this.number] == this.Choice) {
         this.iserror = false;
       } else {
         this.iserror = true;

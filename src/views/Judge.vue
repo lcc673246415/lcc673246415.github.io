@@ -1,10 +1,10 @@
 <!--  -->
 <template>
   <div>
-    <div class="title">{{number}}、{{subject[number-1]}}</div>
-    <mt-radio align="right" @change="changeChoice" v-model="Choice" :options="options[number-1]"></mt-radio>
+    <div class="title">{{number}}、{{subject[number]}}</div>
+    <mt-radio align="right" @change="changeChoice" v-model="Choice" :options="options[number]"></mt-radio>
     <div class="error" v-show="iserror">错误了！</div>
-    <div class="success" v-show="correct">{{values[number-1]==1?'正确':'错误'}}</div>
+    <div class="success" v-show="correct">{{values[number]==1?'正确':'错误'}}</div>
     <div class="box">
       <mt-button type="primary" @click="upper">上一题</mt-button>
       <mt-button type="primary" @click="lower">下一题</mt-button>
@@ -43,11 +43,11 @@ export default {
     };
   },
   created() {
-    console.log(panduanti[0].data)
-    this.subject=panduanti[0].data.map(item => item[1])
-    this.values=panduanti[0].data.map(item => item[4])
-    this.len=panduanti[0].data.length
-    this.options = panduanti[0].data.map(item => {
+    console.log(panduanti)
+    this.subject=panduanti.map(item => item[1])
+    this.values=panduanti.map(item => item[2])
+    this.len=panduanti.length
+    this.options = panduanti.map(item => {
       return [
         {
           label: "正确",
@@ -55,20 +55,23 @@ export default {
         },
         {
           label: "错误",
-          value: "0"
+          value: "-1"
         }
       ];
     });
     this.slots = [
       {
-        values: panduanti[0].data.map(item => item[0])
+        values: panduanti.map((item,index) => index+1)
       }
     ];
     console.log(this.options);
+    console.log(this.slots);
   },
   methods: {
     changeChoice() {
-      if (this.values[this.number - 1] != this.Choice) {
+      console.log(this.values[this.number])
+      console.log(this.Choice)
+      if (this.values[this.number] != this.Choice) {
         this.iserror = true;
       } else {
         this.iserror = false;

@@ -1,10 +1,10 @@
 <!--  -->
 <template>
   <div>
-    <div class="title">{{number}}、{{subject[number-1]}}</div>
-    <mt-checklist align="right" @change="changeChoice" v-model="Choice" :options="options[number-1]"></mt-checklist>
+    <div class="title">{{number}}、{{subject[number]}}</div>
+    <mt-checklist align="right" @change="changeChoice" v-model="Choice" :options="options[number]"></mt-checklist>
     <div class="error" v-show="iserror">没有选择正确</div>
-    <div class="success" v-show="correct">{{values[number-1]}}</div>
+    <div class="success" v-show="correct">{{values[number]}}</div>
     <div class="box">
       <mt-button type="primary" @click="upper">上一题</mt-button>
       <mt-button type="primary" @click="lower">下一题</mt-button>
@@ -41,32 +41,35 @@ export default {
     };
   },
   created() {
-    this.subject=duoxuanti[0].data.map(item => item[1])
-    this.values=duoxuanti[0].data.map(item => item[4])
-    this.len=duoxuanti[0].data.length
-    this.options = duoxuanti[0].data.map(item => {
+    console.log(duoxuanti)
+    this.subject=duoxuanti.map(item => item[1])
+    this.values=duoxuanti.map(item => {
+      return item[2].toString().replace("1","A").replace("2","B").replace("3","C").replace("4","D");
+    })
+    this.len=duoxuanti.length
+    this.options = duoxuanti.map(item => {
       return [
         {
-          label: "A、" + item[5],
+          label: "A、" + item[3],
           value: "A"
         },
         {
-          label: "B、" + item[6],
+          label: "B、" + item[4],
           value: "B"
         },
         {
-          label: "C、" + item[7],
+          label: "C、" + item[5],
           value: "C"
         },
         {
-          label: "D、" + item[8],
+          label: "D、" + item[6],
           value: "D"
         }
       ];
     });
     this.slots = [
       {
-        values: duoxuanti[0].data.map(item => item[0])
+        values: duoxuanti.map((item,index) => index+1)
       }
     ];
     console.log(this.options);
@@ -74,7 +77,8 @@ export default {
   methods: {
     changeChoice() {
       console.log(this.Choice)
-      if (this.values[this.number - 1].trim() != this.Choice.sort().join("")) {
+      console.log(this.values[this.number])
+      if (this.values[this.number] != this.Choice.sort().join("")) {
         this.iserror = true;
       } else {
         this.iserror = false;
